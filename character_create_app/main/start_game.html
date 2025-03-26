@@ -30,30 +30,42 @@
             width: 85vw;
             margin: 5vh 5vw;
             border-radius: 20px;
-            gap: 20px;
+            gap: 40px;
             padding: 20px;
+        }
+        /*horizonally stacked wrappers*/
+        .overall-wrapper {
+            position: relative;
+            display: flex;
+            flex-grow: 1;
+            width: 100%;
+            gap: 10px;
         }
         /*horizonally stacked wrappers*/
         .left-wrapper {
             position: relative;
+            display: flex;
+            flex-direction: column;
             width: 40%;
-            background-color: #FF429A;
+            gap: 20px;
         }
         .right-wrapper {
             position: relative;
-            width: 40%;
-            background-color: #FF429A;
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            gap: 20px;
         }
 
-        /*yellow half-size page for game*/
-        .yellow-page-half {
+        /*yellow full-size page for about and how2play*/
+        .yellow-page {
+            position: relative;
             margin: 0 auto;
             border: 4px solid #D2C86A;
             background-color: #FFFFED;
             padding: 20px;
-            margin: 30px;
-            width: 50%;
-            height: 100%;
+            width: 100%;
+            
         }
         /*yellow page header*/
         .yellow-page-header {
@@ -61,23 +73,95 @@
             font-size: 25px;
             text-align: center;
             font-weight: 200;
+            margin-bottom: 30px;
         }
         /*yellow page text*/
         .yellow-page-text {
             color: #8E6649; 
-            font-size: 15px;
+            font-size: 16px;
+        }
+        .arrow {
+            background-color: #FF429A;
+            color: white;
+            cursor: pointer;
+            height: 20px;
+            width: 20px;
+        }
+        /*horizontally stacked options*/
+        .options-wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+            width: 100%;
         }
     </style>
 </head>
 
 <body>
     <div class="main-window">
+        <!-- left side (in the yellow part) -->
         <div class="left-wrapper">
-            <p>hi</p>
+            <div class="yellow-page">
+                <!-- start with character info -->
+                <div id="content">
+                    <div class="yellow-page-header">info</div>
+                    <!-- customizing labels -->
+                    <div class="overall-wrapper">
+                        <div class="left-wrapper">
+                            <div class="yellow-page-text">
+                                <p>name:</p>
+                                <P>class:</P>
+                                <p>message:</p>
+                            </div>
+                        </div>
+                        <!-- customizing options -->
+                        <div class="right-wrapper">
+                            <!-- choose a name -->
+                            <div style="display: flex; align-items:center; gap: 10px;">
+                                <input type="text" maxlength="10" placeholder="name here" style="width: 120px; height: 20px; font-size: 16px; border-radius: 10px; padding: 5px; border: 2px solid #FF429A;">
+                                <button style="background-color: #FF429A; color: white; font-size: 16px; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">
+                                    >
+                                </button>
+                            </div>
+                            <!-- choose a class -->
+                            <div class="options-wrapper">
+                                <button class="arrow" onclick="classBackward()"><</button>
+                                <div class="yellow-page-text" id="class-option" style="width: 100px; height: 20px; text-align: center;"></div>
+                                <button class="arrow" onclick="classForward()">></button>
+                            </div>
+                            
+                            <!-- write a personal message -->
+                            <p>message:</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- right side for the character -->
         <div class="right-wrapper">
             <p>right</p>
         </div>
     </div>
+    <script>
+        const classes=["human", "elf", "goblin", "orc", "fairy"];
+        let x = 0;
+        let class_op = classes[x];
+        let class_fill = document.getElementById("class-option");
+        class_fill.textContent = `${class_op}`;
+
+        function classForward(){
+            x = (x + 1) % 5;
+            let class_op = classes[x];
+            let class_fill = document.getElementById("class-option");
+            class_fill.textContent = `${class_op}`;
+        }
+        function classBackward(){
+            x = (x - 1) % 5;
+            let class_op = classes[x];
+            let class_fill = document.getElementById("class-option");
+            class_fill.textContent = `${class_op}`;
+        }
+    </script>
 </body>
 </html>
