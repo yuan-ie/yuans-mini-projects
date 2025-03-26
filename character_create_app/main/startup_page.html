@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Creation Startup</title>
+</head>
+<body>
+    <h1>click the button to start the game!</h1>
+    <!-- <button id="startGameBtn">start game</button> -->
+    <button onclick="openGame()">start game</button>
+    <script>
+        function openGame(){
+            const url = "menu_page.html"; // url to open
+            const windowName = "Character Creation";
+            const features = "width=1000,height=750,resizable=no,scrollbars=no"; // window settings
+            window.open(url, windowName, features);
+        }
+        
+        // attach the function to button click
+        //document.getElementById("startGameBtn").addEventListener("click", openGame);
+    </script>
+
+</body>
+</html>

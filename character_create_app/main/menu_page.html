@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Creation</title>
+    <style>
+        body {
+            background-color: #FFD3DF;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        /*switcable content*/
+        #content {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
+            width: 100%;
+            gap: 20px;
+        }
+        /*main pink window within the overall window*/
+        .main-window {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            border: 4px solid #FF429A;
+            background-color: #FFEAF5;
+            height: 85vh;
+            width: 85vw;
+            margin: 5vh 5vw;
+            border-radius: 20px;
+            padding: 20px;
+        }
+        /*title in the menu page*/
+        .title {
+            margin-top: 15vh;
+            margin-bottom: 10vh;
+            font-family: 'Arial', sans-serif;
+            font-size: 50px;
+            text-align: center;
+            color: #FF429A;
+            padding: 20px;
+        }
+        /*menu button format*/
+        .menu-button {
+            /* button aspects */
+            margin: 0 auto; /* positions button to center*/
+            border: 4px solid #FF429A;
+            background-color: #FF9AC6;
+            height: 50px;
+            width: 250px;
+            position: relative;
+            border-radius: 20px;
+            /* text-in-button aspects */
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            font-size: 25px;
+            color: #FEFFD8;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3 ease, border 0.3s ease;            
+        }
+        .menu-button:hover {
+            background-color: #FEFFD8;
+            color: #FF9AC6;
+            border: 4px solid #FF9AC6;
+        }
+        /*yellow full-size page for about and how2play*/
+        .yellow-page {
+            margin: 0 auto;
+            border: 4px solid #D2C86A;
+            background-color: #FFFFED;
+            padding: 20px;
+            margin: 30px;
+            width: 90%;
+            height: 75%;
+        }
+        /*yellow page header*/
+        .yellow-page-header {
+            color: #8E6649; 
+            font-size: 25px;
+            text-align: center;
+            font-weight: 200;
+        }
+        /*yellow page text*/
+        .yellow-page-text {
+            color: #8E6649; 
+            font-size: 15px;
+        }
+        /*back button layout*/
+        .back-button {
+            /* button aspects */
+            border: 4px solid #FF429A;
+            background-color: #FF9AC6;
+            height: 50px;
+            width: 250px;
+            border-radius: 20px;
+            /* text-in-button aspects */
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            font-size: 25px;
+            color: #FEFFD8;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3 ease, border 0.3s ease;   
+        }
+        /*container at the bottom left for back button*/
+        .back-button-container {
+            display: flex;
+            align-items: flex-end;
+            width: 30px;
+            bottom: 20px;
+            left: 20px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-window">
+        <div id="content">
+            <div class="title">character creation</div>
+            <button class="menu-button" onclick="startGame()">start</button>
+            <button class="menu-button" onclick="dirGame()">how to play</button>
+            <button class="menu-button" onclick="aboutGame()">about</button>
+        </div>
+    </div>
+    <script>
+        const menuContent = `
+            <div class="title">character creation</div>
+            <button class="menu-button" onclick="startGame()">start</button>
+            <button class="menu-button" onclick="dirGame()">how to play</button>
+            <button class="menu-button" onclick="aboutGame()">about</button>
+        `;
+
+        const aboutContent = `
+            <div class="yellow-page">
+                <p class="yellow-page-header">about</p>
+                <div class="yellow-page-text">
+                    <p>hi! my name is yuan and i created this game!</p>
+                </div>
+            </div>
+
+            <div class="back-button-container">
+                <button class="back-button" onclick="goBack()">back</button>
+            </div>
+        `;
+        function aboutGame(){
+            const content = document.getElementById('content');
+            content.innerHTML = aboutContent;
+        }
+
+        function goBack(){
+            const content= document.getElementById('content');
+            content.innerHTML = menuContent;
+        }
+
+        function startGame(){
+            window.location.href = "start_game.html";
+        }
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Creation</title>
+    <style>
+        body {
+            background-color: #FFD3DF;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        /*switcable content*/
+        #content {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
+            width: 100%;
+        }
+        /*main pink window within the overall window*/
+        .main-window {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            border: 4px solid #FF429A;
+            background-color: #FFEAF5;
+            height: 85vh;
+            width: 85vw;
+            margin: 5vh 5vw;
+            border-radius: 20px;
+            gap: 20px;
+            padding: 20px;
+        }
+        /*horizonally stacked wrappers*/
+        .left-wrapper {
+            position: relative;
+            width: 40%;
+            background-color: #FF429A;
+        }
+        .right-wrapper {
+            position: relative;
+            width: 40%;
+            background-color: #FF429A;
+        }
+
+        /*yellow half-size page for game*/
+        .yellow-page-half {
+            margin: 0 auto;
+            border: 4px solid #D2C86A;
+            background-color: #FFFFED;
+            padding: 20px;
+            margin: 30px;
+            width: 50%;
+            height: 100%;
+        }
+        /*yellow page header*/
+        .yellow-page-header {
+            color: #8E6649; 
+            font-size: 25px;
+            text-align: center;
+            font-weight: 200;
+        }
+        /*yellow page text*/
+        .yellow-page-text {
+            color: #8E6649; 
+            font-size: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-window">
+        <div class="left-wrapper">
+            <p>hi</p>
+        </div>
+        <div class="right-wrapper">
+            <p>right</p>
+        </div>
+    </div>
+</body>
+</html>
