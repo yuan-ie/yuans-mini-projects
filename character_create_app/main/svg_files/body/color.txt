@@ -1,0 +1,7 @@
+human:
+	stroke:
+		light: #E0B08A
+		tan: #BA9875
+	fill:
+		light: #F4DFCA
+		tan: #DABEA1

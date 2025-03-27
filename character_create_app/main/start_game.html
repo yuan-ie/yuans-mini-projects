@@ -100,6 +100,14 @@
             width: 100%;
             margin-bottom: 30px;
         }
+        .color-block {
+            width: 25px;
+            height: 25px;
+            border-color: #FF429A;
+            border-radius: 3px;
+            border-width: 2px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -125,6 +133,7 @@
                         <!-- customizing labels -->
                         <div class="left-wrapper">
                             <p class="yellow-page-text" style="padding-bottom: 0px;">name:</p>
+                            <P class="yellow-page-text" style="padding-bottom: 0px;">gender:</P>
                             <P class="yellow-page-text" style="padding-bottom: 0px;">class:</P>
                             <p class="yellow-page-text" style="padding-bottom: 10px;">message:</p>
                         </div>
@@ -137,6 +146,11 @@
                                 <button style="background-color: #FF429A; color: white; font-size: 16px; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">
                                     >
                                 </button>
+                            </div>
+                            <!-- choose a gender -->
+                            <div class="options-wrapper">
+                                <button class="arrow" onclick="genderFlip(0)"><</button>
+                                <button class="arrow" onclick="genderFlip(1)">></button>
                             </div>
                             <!-- choose a class -->
                             <div class="options-wrapper">
@@ -155,22 +169,33 @@
         </div>
         <!-- right side for the character -->
         <div class="right-wrapper">
-            <p>right</p>
+            <img id="body-image" src="svg_files/body/male_body/human_body/male-human-light.svg" alt="body">
         </div>
     </div>
     <script>
-        const pages=["info", "body", "clothes"];
-        const classes=["human", "elf", "goblin", "orc", "fairy"];
+        const pages = ["info", "body", "clothes"];
+        const genders = ["male", "female"];
+        const classes = ["human", "elf", "goblin", "orc", "fairy"];
+        const skins = ["light", "tan"];
 
-        let y = 0;
-        let page_op = pages[y];
+        // info page
+        let page_op = pages[0];
         let page_fill = document.getElementById("page-option");
         page_fill.textContent = `${page_op}`;
 
-        let x = 0;
-        let class_op = classes[x];
+        let gen_op = genders[0];
+
+        let class_op = classes[0];
         let class_fill = document.getElementById("class-option");
         class_fill.textContent = `${class_op}`;
+
+        // body page
+        let skin_op = skins[0];
+
+        let page_x = 0;
+        let gen_x = 0;
+        let class_x = 0;
+        let skin_x = 0;
 
 
         const page_info = `
@@ -192,6 +217,11 @@
                     <button style="background-color: #FF429A; color: white; font-size: 16px; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">
                         >
                     </button>
+                </div>
+                <!-- choose a gender -->
+                <div class="options-wrapper">
+                    <button class="arrow" onclick="genderFlip(0)"><</button>
+                    <button class="arrow" onclick="genderFlip(1)">></button>
                 </div>
                 <!-- choose a class -->
                 <div class="options-wrapper">
@@ -221,7 +251,10 @@
 
             <!-- customizing options -->
             <div class="right-wrapper">
-                <p>hi</p>
+                <!-- skin color selection -->
+                <div class="options-wrapper">
+                    <button class="color-block" onclick="skinColor(0)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="skinColor(1)" style="background-color: #dabea1;"></button>
             </div>
         </div>
         `;
@@ -234,13 +267,13 @@
 
         /* ------ page navigation ------ */
         function pageFlip(i){
-            y = (y + i + 3) % 3;
-            let page_op = pages[y];
+            page_x = (page_x + i + 3) % 3;
+            let page_op = pages[page_x];
             let page_fill = document.getElementById("page-option");
             page_fill.textContent = `${page_op}`;
 
             let page_content = document.getElementById("content");
-            page_content.innerHTML = page_contents[y];
+            page_content.innerHTML = page_contents[page_x];
             
             if (page_op == "info"){
                 loadInfo();
@@ -254,16 +287,41 @@
         }
 
         /* ------ info navigation ------ */
+        function genderFlip(i){
+            gen_op = genders[i];
+            updateBody();
+        }
+
+        /* ------ info navigation ------ */
         function classFlip(i){
-            x = (x + i + 5) % 5;
-            let class_op = classes[x];
+            class_x = (class_x + i + 5) % 5;
+            class_op = classes[class_x];
             let class_fill = document.getElementById("class-option");
             class_fill.textContent = `${class_op}`;
+
+            // reset the skin to the first one when class is changed. 
+            skin_op = skins[0];
+            updateBody();
+        }
+
+        function skinColor(i){
+            skin_op = skins[i];
+            updateBody();
         }
 
         /* ------ page saves ------ */
+        function updateBody(){
+            let body_image = document.getElementById("body-image");
+            
+            console.log(gen_op)
+            console.log(class_op)
+            console.log(skin_op)
+            let body_path = `svg_files/body/${gen_op}_body/${class_op}_body/${gen_op}-${class_op}-${skin_op}.svg`;
+            console.log(body_path)
+            body_image.src = body_path;
+        }
         function loadInfo(){
-            let class_op = classes[x];
+            class_op = classes[class_x];
             let class_fill = document.getElementById("class-option");
             class_fill.textContent = `${class_op}`;
         }
