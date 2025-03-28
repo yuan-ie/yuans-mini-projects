@@ -169,13 +169,13 @@
         </div>
         <!-- right side for the character -->
         <div class="right-wrapper">
-            <img id="body-image" src="svg_files/body/male_body/human_body/male-human-light.svg" alt="body">
+            <img id="body-image" src="svg_files/body/male/human/male-human-light.svg" height="450px" alt="body">
         </div>
     </div>
     <script>
-        const pages = ["info", "body", "clothes"];
+        const pages = ["info", "body", "hair", "clothes"];
         const genders = ["male", "female"];
-        const classes = ["human", "elf", "goblin", "orc", "fairy"];
+        const classes = ["human", "elf", "fairy", "goblin", "orc"];
         const skins = ["light", "tan"];
 
         // info page
@@ -243,8 +243,8 @@
             <!-- customizing labels -->
             <div class="left-wrapper">
                 <p class="yellow-page-text" style="padding-bottom: 0px;">skin color:</p>
-                <P class="yellow-page-text" style="padding-bottom: 0px;">hair:</P>
-                <p class="yellow-page-text" style="padding-bottom: 10px;">hair color:</p>
+                <P class="yellow-page-text" style="padding-bottom: 0px;">brow:</P>
+                <p class="yellow-page-text" style="padding-bottom: 10px;">brow color:</p>
                 <P class="yellow-page-text" style="padding-bottom: 0px;">eyes:</P>
                 <p class="yellow-page-text" style="padding-bottom: 10px;">eye color:</p>
             </div>
@@ -259,15 +259,60 @@
         </div>
         `;
 
+        const page_hair = `
+        <!-- page content -->
+        <div class="overall-wrapper">
+
+            <!-- customizing labels -->
+            <div class="left-wrapper">
+                <P class="yellow-page-text" style="padding-bottom: 0px;">bangs:</P>
+                <p class="yellow-page-text" style="padding-bottom: 10px;">bangs color:</p>
+                <P class="yellow-page-text" style="padding-bottom: 0px;">hair-top:</P>
+                <p class="yellow-page-text" style="padding-bottom: 10px;">hair-top color:</p>
+                <P class="yellow-page-text" style="padding-bottom: 0px;">hair-bottom:</P>
+                <p class="yellow-page-text" style="padding-bottom: 10px;">hair-bottom color:</p>
+            </div>
+
+            <!-- customizing options -->
+            <div class="right-wrapper">
+                <!-- bangs selection -->
+                <div class="options-wrapper">
+                    <button class="arrow" onclick="hairFlipBangs(-1)"><</button>
+                    <div class="yellow-page-header" id="page-option"></div>
+                    <button class="arrow" onclick="pageFlipBangs(1)">></button>
+                </div>
+
+                <!-- hair-top selection -->
+                <div class="options-wrapper">
+                    <button class="arrow" onclick="hairFlipTop(-1)"><</button>
+                    <div class="yellow-page-header" id="page-option"></div>
+                    <button class="arrow" onclick="pageFlipTop(1)">></button>
+                </div>
+
+                <!-- hair-bottom selection -->
+                <div class="options-wrapper">
+                    <button class="arrow" onclick="hairFlipBottom(-1)"><</button>
+                    <div class="yellow-page-header" id="page-option"></div>
+                    <button class="arrow" onclick="pageFlipBottom(1)">></button>
+                </div>
+                
+                <!-- hair color selection -->
+                <div class="options-wrapper">
+                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="hairColor(1)" style="background-color: #dabea1;"></button>
+            </div>
+        </div>
+        `;
+
         const page_clothes = `
         <p>hello</p>
         `;
 
-        const page_contents = [page_info, page_body, page_clothes];
+        const page_contents = [page_info, page_body, page_hair, page_clothes];
 
         /* ------ page navigation ------ */
         function pageFlip(i){
-            page_x = (page_x + i + 3) % 3;
+            page_x = (page_x + i + pages.length) % pages.length;
             let page_op = pages[page_x];
             let page_fill = document.getElementById("page-option");
             page_fill.textContent = `${page_op}`;
@@ -281,6 +326,9 @@
             else if (page_op == "body"){
                 loadBody();
             }         
+            else if (page_op == "hair"){
+                loadBody();
+            }     
             else if (page_op == "clothes"){
                 loadClothes();
             }
@@ -294,7 +342,7 @@
 
         /* ------ info navigation ------ */
         function classFlip(i){
-            class_x = (class_x + i + 5) % 5;
+            class_x = (class_x + i + classes.length) % classes.length;
             class_op = classes[class_x];
             let class_fill = document.getElementById("class-option");
             class_fill.textContent = `${class_op}`;
@@ -309,6 +357,26 @@
             updateBody();
         }
 
+        function eyesFlip(i){
+
+        }
+
+        function browsFlip(i){
+
+        }
+
+        function hairFlipBangs(i){
+
+        }
+
+        function hairFlipTop(i){
+
+        }
+
+        function hairFlipBottom(i){
+
+        }
+
         /* ------ page saves ------ */
         function updateBody(){
             let body_image = document.getElementById("body-image");
@@ -316,9 +384,13 @@
             console.log(gen_op)
             console.log(class_op)
             console.log(skin_op)
-            let body_path = `svg_files/body/${gen_op}_body/${class_op}_body/${gen_op}-${class_op}-${skin_op}.svg`;
+            let body_path = `svg_files/body/${gen_op}/${class_op}/${gen_op}-${class_op}-${skin_op}.svg`;
             console.log(body_path)
             body_image.src = body_path;
+
+            // Ensure consistent height
+            body_image.style.height = "450px"; // Set the desired height
+            body_image.style.objectFit = "contain"; // Preserve aspect ratio
         }
         function loadInfo(){
             class_op = classes[class_x];
@@ -333,6 +405,15 @@
         function loadClothes(){
 
         }
+
+        function showSprite(x, y, width=400, height=500){
+            const svg = document.getElementById("body-display");
+            svg.setAttribute("viewBox", `${x}, ${y}, ${width}, ${height}`);
+            svg.innerHTML = `<use href="sprite-sheet.svg"></use>`;
+        }
+
+        // Example usage
+        showSprite(100, 0, 100, 100); // Focus on the second sprite
 
         
     </script>
