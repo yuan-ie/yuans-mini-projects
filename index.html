@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HTML Tutorial</title> <!-- title of browser tab -->
+        <!-- "flex" allows the children to stack horizontally -->
+        <style>
+            .image-container {
+                display: flex;
+                justify-content: center;
+                gap:20px;
+            }
+            .image-wrapper {
+                position: relative;
+                text-align: center;
+                width: 300px;
+            }
+            .image-wrapper img {
+                width: 100%;
+                border-radius: 8px;
+            }
+            .image-wrapper .text {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                font-size: 1.5rem;
+                font-weight: bold;
+                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            }
+        </style>
+    </head>
+    <body>
+        <h1>yuan's blog</h1>
+        <p>hello world! my name is yuan, and this is my first html project! :D <br>
+            here, you will get to know more about me!
+        </p>
+        <h3>some personal information about me</h3>
+        <p>
+            age:23<br>
+            height: 5'2<br>
+            weight: 94 lbs<br>
+        </p>
+        <h3>some hobbies</h3>
+        <div class="image-container">
+            <div class="image-wrapper">
+                <p>art<p>   
+                <img src="https://static.wikia.nocookie.net/sonicforhire/images/b/bb/Kirby_%282002%29.png/revision/latest/thumbnail/width/360/height/360?cb=20191228022542" alt="kirby" />
+            </div>
+            <div class="image-wrapper">
+                <p>fashion</p>
+                <img src="https://static.wikia.nocookie.net/sonicforhire/images/b/bb/Kirby_%282002%29.png/revision/latest/thumbnail/width/360/height/360?cb=20191228022542" alt="kirby" />
+            </div>
+            <div class="image-wrapper">
+                <p>coding</p>
+                <img src="https://static.wikia.nocookie.net/sonicforhire/images/b/bb/Kirby_%282002%29.png/revision/latest/thumbnail/width/360/height/360?cb=20191228022542" alt="kirby" />
+            </div>
+        </div>
+        <h3>some links</h3>
+        <a href="https://github.com/yuan-ie">github</a>
+        <a href="https://www.linkedin.com/in/angela-nghiem-055600348/">linkedin</a>
+        <a href="https://www.instagram.com/x.kyuhn/">instagram</a><br>
+        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/48265441-add4-48b6-99ce-fb71117c63bb/dgmyus1-fd15c9ce-5df6-45c9-8fa1-abbceab8f239.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzQ4MjY1NDQxLWFkZDQtNDhiNi05OWNlLWZiNzExMTdjNjNiYlwvZGdteXVzMS1mZDE1YzljZS01ZGY2LTQ1YzktOGZhMS1hYmJjZWFiOGYyMzkucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.SThOEgYdvPXQes6r0hKpbEVVAe552wVufrx8fywqpJw" alt="kirby" />
+    </body>
+</html>
