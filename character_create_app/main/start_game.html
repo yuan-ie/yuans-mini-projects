@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
     <title>Character Creation</title>
     <style>
         body {
@@ -16,7 +17,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            
+            gap: 30px;
             width: 100%;
         }
         /*main pink window within the overall window*/
@@ -70,35 +71,53 @@
             width: 100%;
             
         }
+
         /*yellow page header*/
         .yellow-page-header {
+            font-family: "Indie Flower", cursive;
             color: #8E6649; 
-            font-size: 25px;
+            font-size: 30px;
             text-align: center;
-            font-weight: 200;
+            font-weight: 800;
             width: 200px;
         }
+
         /*yellow page text*/
         .yellow-page-text {
+            font-family: "Indie Flower", cursive;
             color: #8E6649; 
-            font-size: 16px;
+            font-weight: 800;
+            font-size: 25px;
+            width: 300px;
         }
+
         .arrow {
-            background-color: #FF429A;
-            color: white;
             cursor: pointer;
-            height: 20px;
-            width: 20px;
+            background: none;
+            border: none;
+            padding: none;
+            outline: none;
         }
+
+        .arrow:hover {
+            filter: hue-rotate(100deg) saturate(1.6);
+            transition: filter 0.2s ease;
+        }
+
+        .arrow img {
+            height: 40px;
+            width: 40px;
+        }
+
         /*horizontally stacked options*/
         .options-wrapper {
             position: relative;
             display: flex;
             flex-direction: row;
             justify-content: center;
-            gap: 5px;
+            gap: 10px;
             width: 100%;
-            margin-bottom: 30px;
+            margin-bottom: 0px;
         }
         .color-block {
             width: 25px;
@@ -130,6 +149,9 @@
             height: 100%;
         }
 
+        #sprite-under {
+            z-index: 7;
+        }
         #sprite-hairbangs {
             z-index: 6;
         }
@@ -158,27 +180,25 @@
             <div class="yellow-page">
 
                 <!-- page header -->
-                <div class="options-wrapper">
-                    <button class="arrow" onclick="pageFlip(-1)"><</button>
+                <div class="options-wrapper" style="padding-bottom:30px">
+                    <button class="arrow" onclick="pageFlip(-1)">
+                        <img src="png_files/left-arrow.png" />
+                    </button>
                     <div class="yellow-page-header" id="page-option"></div>
-                    <button class="arrow" onclick="pageFlip(1)">></button>
+                    <button class="arrow" onclick="pageFlip(1)">
+                        <img src="png_files/right-arrow.png" />
+                    </button>
                 </div>
 
                 <!-- start with character info -->
                 <div id="content">
 
-                    <!-- page content -->
+                    <!-- choose a name -->
                     <div class="overall-wrapper">
-
-                        <!-- customizing labels -->
                         <div class="left-wrapper">
-                            <p class="yellow-page-text" style="padding-bottom: 0px;">name:</p>
-                            <P class="yellow-page-text" style="padding-bottom: 0px;">gender:</P>
-                            <P class="yellow-page-text" style="padding-bottom: 0px;">class:</P>
-                            <p class="yellow-page-text" style="padding-bottom: 10px;">message:</p>
+                            <span class="yellow-page-text">name:</span>
+                            
                         </div>
-
-                        <!-- customizing options -->
                         <div class="right-wrapper">
                             <!-- choose a name -->
                             <div style="display: flex; align-items:center; gap: 10px;">
@@ -187,31 +207,55 @@
                                     >
                                 </button>
                             </div>
-                            <!-- choose a gender -->
-                            <div class="options-wrapper">
-                                <button class="arrow" onclick="genderFlip(0)"><</button>
-                                <button class="arrow" onclick="genderFlip(1)">></button>
-                            </div>
-                            <!-- choose a class -->
-                            <div class="options-wrapper">
-                                <button class="arrow" onclick="classFlip(0)"><</button>
-                                <div class="yellow-page-text" id="class-option" style="width: 100px; height: 20px; text-align: center;"></div>
-                                <button class="arrow" onclick="classFlip(1)">></button>
-                            </div>
+                        </div>     
 
-                            <!-- write a personal message -->
-                            <p>message:</p>
+                    </div> <!-- choose a name -->
+
+                    <!-- choose a gender -->
+                    <div class="overall-wrapper">
+                        <div class="left-wrapper">
+                            <span class="yellow-page-text">gender:</span>
+                            
                         </div>
-                    </div>
-                    <!-- ---------------- -->
-                </div>
+                        <div class="right-wrapper">
+                            <div class="options-wrapper">
+                                <button class="arrow" onclick="genderFlip(0)">
+                                    <img src="png_files/male.png" style="height:50px; width:50px;" />
+                                </button>
+                                <button class="arrow" onclick="genderFlip(1)">
+                                    <img src="png_files/female.png" style="height:60px; width:60px;" />
+                                </button>
+                            </div>
+                        </div>     
+                    </div> <!-- choose a gender -->
+
+                    <!-- choose a class -->
+                    <div class="overall-wrapper">
+                        <div class="left-wrapper">
+                            <span class="yellow-page-text">class:</span>
+                            
+                        </div>
+                        <div class="right-wrapper">
+                            <div class="options-wrapper">
+                                <button class="arrow" onclick="classFlip(0)">
+                                    <img src="png_files/left-arrow.png" />
+                                </button>
+                                <div class="yellow-page-text" id="class-option" style="width:100px; max-width:100%; height: 10px; text-align: center;"></div>
+                                <button class="arrow" onclick="classFlip(1)">
+                                    <img src="png_files/right-arrow.png" />
+                                </button>
+                            </div>
+                        </div>     
+                    </div> <!-- choose a class -->
+
+                </div> <!-- content -->
             </div>
         </div>
-        <!-- right side for the character -->
 
+        <!-- right side for the character -->
+        <!-- character shows here -->
         <div class="right-wrapper">
             <p class="sprite-name">hello</p>
-            <!-- <img id="body-image" src="png_files/sprite-sheet-v1.png" width="500" height="625" />  -->
             <div class="sprite-container">
                 <img id="sprite-body" width="400" height="500" /> 
                 <img id="sprite-hairbangs" width="400" height="500" /> 
@@ -219,6 +263,7 @@
                 <img id="sprite-hairbot" width="400" height="500" /> 
                 <img id="sprite-eyes" width="400" height="500" /> 
                 <img id="sprite-brows" width="400" height="500" /> 
+                <img id="sprite-under" width="400" height="500" /> 
             </div> 
         </div>
     </div>
@@ -229,9 +274,11 @@
 
         /* initialize constants */
         const sprite_sheet = new Image();
-        sprite_sheet.src = "png_files/sprite-sheet-v1.png";
+        sprite_sheet.src = "png_files/sprite-sheet-v2.png";
 
         /* pixel code (px) character initialization */
+        let ux = 0; // underwear x
+        let uy = 0; // underwear y
         let bx = 0; // body x
         let by = 0; // body y
         let hbx = 0; // hair bangs x
@@ -255,56 +302,44 @@
         const classes = ["human", "elf", "fairy", "goblin", "orc"];
         const skins = ["light", "tan"];
         const hairtop_len = 7;
-        const hairbot_len = 9;
+        const hairbot_len = 13;
         const hairbangs_len = 7;
         const eyes_len = 5;
         const brows_len = 6;
         
 
-        // right side - body initialization
+        // load the sprite sheet and initialize character
+        //
         sprite_sheet.onload = function(){
-            //document.getElementById("body-image").src = initialSprite();
             initialSprite();
-            //document.getElementById("body-image").src = "png_files/sprite-sheet-v1.png"
         }
-
         sprite_sheet.onerror = function () {
             console.error("Failed to load sprite sheet!");
         };
 
-        // info page
+        /* ---- flipping through the pages ---- */
+        //
         let page_op = pages[0];
         let page_fill = document.getElementById("page-option");
         page_fill.textContent = `${page_op}`;
 
-        let gen_op = genders[0];
-
+        /* ---- 1st page: INFO ---- */
+        //
         let class_op = classes[0];
         let class_fill = document.getElementById("class-option");
         class_fill.textContent = `${class_op}`;
-
-        // body page
-        let skin_op = skins[0];
-
+        // specific indices
         let page_x = 0;
-        let gen_x = 0;
         let class_x = 0;
-        let skin_x = 0;
-
 
         const page_info = `
         <!-- page content -->
+        <!-- choose a name -->
         <div class="overall-wrapper">
-
-            <!-- customizing labels -->
             <div class="left-wrapper">
-                <p class="yellow-page-text" style="padding-bottom: 0px;">name:</p>
-                <P class="yellow-page-text" style="padding-bottom: 0px;">gender:</P>
-                <P class="yellow-page-text" style="padding-bottom: 0px;">class:</P>
-                <p class="yellow-page-text" style="padding-bottom: 10px;">message:</p>
+                <span class="yellow-page-text">name:</span>
+                
             </div>
-
-            <!-- customizing options -->
             <div class="right-wrapper">
                 <!-- choose a name -->
                 <div style="display: flex; align-items:center; gap: 10px;">
@@ -313,139 +348,236 @@
                         >
                     </button>
                 </div>
-                <!-- choose a gender -->
-                <div class="options-wrapper">
-                    <button class="arrow" onclick="genderFlip(0)">boy</button>
-                    <button class="arrow" onclick="genderFlip(1)">girl</button>
-                </div>
-                <!-- choose a class -->
-                <div class="options-wrapper">
-                    <button class="arrow" onclick="classFlip(0)"><</button>
-                    <div class="yellow-page-text" id="class-option" style="width: 100px; height: 20px; text-align: center;"></div>
-                    <button class="arrow" onclick="classFlip(1)">></button>
-                </div>
+            </div>     
+
+        </div> <!-- choose a name -->
+
+        <!-- choose a gender -->
+        <div class="overall-wrapper">
+            <div class="left-wrapper">
+                <span class="yellow-page-text">gender:</span>
                 
-                <!-- write a personal message -->
-                <p>message:</p>
             </div>
-        </div>
+            <div class="right-wrapper">
+                <div class="options-wrapper">
+                    <button class="arrow" onclick="genderFlip(0)">
+                        <img src="png_files/male.png" style="height:50px; width:50px;" />
+                    </button>
+                    <button class="arrow" onclick="genderFlip(1)">
+                        <img src="png_files/female.png" style="height:60px; width:60px;" />
+                    </button>
+                </div>
+            </div>     
+        </div> <!-- choose a gender -->
+
+        <!-- choose a class -->
+        <div class="overall-wrapper">
+            <div class="left-wrapper">
+                <span class="yellow-page-text">class:</span>
+            </div>
+            <div class="right-wrapper">
+                <div class="options-wrapper">
+                    <button class="arrow" onclick="classFlip(0)">
+                        <img src="png_files/left-arrow.png" />
+                    </button>
+                    <div class="yellow-page-text" id="class-option" style="width:100px; max-width:100%; height: 10px; text-align: center;"></div>
+                    <button class="arrow" onclick="classFlip(1)">
+                        <img src="png_files/right-arrow.png" />
+                    </button>
+                </div>
+            </div>     
+        </div> <!-- choose a class -->
         `;
 
+        /* ---- 2nd page: BODY ---- */
+        //
         const page_body = `
         <!-- page content -->
+
+        <!-- skin color selection -->
         <div class="overall-wrapper">
-
-            <!-- customizing labels -->
             <div class="left-wrapper">
-                <p class="yellow-page-text" style="padding-bottom: 0px;">skin color:</p>
-                <P class="yellow-page-text" style="padding-bottom: 0px;">brow:</P>
-                <p class="yellow-page-text" style="padding-bottom: 10px;">brow color:</p>
-                <P class="yellow-page-text" style="padding-bottom: 0px;">eyes:</P>
-                <p class="yellow-page-text" style="padding-bottom: 10px;">eye color:</p>
+                <span class="yellow-page-text">skin color:</span>
             </div>
-
-            <!-- customizing options -->
             <div class="right-wrapper">
-                <!-- skin color selection -->
                 <div class="options-wrapper">
-                    <button class="color-block" onclick="skinColor(0)" style="background-color: #f4dfca;"></button>
-                    <button class="color-block" onclick="skinColor(1)" style="background-color: #dabea1;"></button>
+                    <button class="color-block" onclick="skinColor(1.05, 1)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="skinColor(1, 1)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="skinColor(0.9, 1.4)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="skinColor(0.8, 1.6)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="skinColor(0.7, 1.8)" style="background-color: #f4dfca;"></button>
                 </div>
+            </div>
+        </div>
 
-                <!-- brows selection -->
+        <!-- brow selection -->
+        <div class="overall-wrapper">
+            <div class="left-wrapper">
+                <span class="yellow-page-text">brow:</span>
+            </div>
+            <div class="right-wrapper">
                 <div class="options-wrapper">
-                    <button class="arrow" onclick="browsFlip(0)";"></button>
-                    <button class="arrow" onclick="browsFlip(1)";"></button>
+                    <button class="arrow" onclick="browsFlip(0)";">
+                        <img src="png_files/left-arrow.png" />
+                    </button>
+                    <button class="arrow" onclick="browsFlip(1)";">
+                        <img src="png_files/right-arrow.png" />
+                    </button>
                 </div>
+            </div>
+        </div>
 
-                <!-- brow color selection -->
+        <!-- brow color selection -->
+        <div class="overall-wrapper">
+            <div class="left-wrapper">
+                <span class="yellow-page-text">brow color:</span>
+            </div>
+            <div class="right-wrapper">
                 <div class="options-wrapper">
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('brows', 0)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('brows', 50)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('brows', 100)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('brows', 150)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('brows', 200)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('brows', 250)" style="background-color: #f4dfca;"></button>
                 </div>
+            </div>
+        </div>
 
-                <!-- eyes selection -->
+        <!-- eye selection -->
+        <div class="overall-wrapper">
+            <div class="left-wrapper">
+                <span class="yellow-page-text">eye:</span>
+            </div>
+            <div class="right-wrapper">
                 <div class="options-wrapper">
-                    <button class="arrow" onclick="eyesFlip(0)";"></button>
-                    <button class="arrow" onclick="eyesFlip(1)";"></button>
+                    <button class="arrow" onclick="eyesFlip(0)";">
+                        <img src="png_files/left-arrow.png" />
+                    </button>
+                    <button class="arrow" onclick="eyesFlip(1)";">
+                        <img src="png_files/right-arrow.png" />
+                    </button>
                 </div>
+            </div>
+        </div>
 
-                <!-- eye color selection -->
+        <!-- eye color selection -->
+        <div class="overall-wrapper">
+            <div class="left-wrapper">
+                <span class="yellow-page-text">eye color:</span>
+            </div>
+            <div class="right-wrapper">
                 <div class="options-wrapper">
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('eyes', 0)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('eyes', 50)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('eyes', 100)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('eyes', 150)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('eyes', 200)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('eyes', 250)" style="background-color: #f4dfca;"></button>
                 </div>
-
             </div>
         </div>
         `;
 
+        /* ---- 3rd page: HAIR ---- */
+        //
         const page_hair = `
         <!-- page content -->
+        
+        <!-- hair-bangs selection -->
         <div class="overall-wrapper">
-
-            <!-- customizing labels -->
             <div class="left-wrapper">
-                <P class="yellow-page-text" style="padding-bottom: 0px;">bangs:</P>
-                <p class="yellow-page-text" style="padding-bottom: 10px;">bangs color:</p>
-                <P class="yellow-page-text" style="padding-bottom: 0px;">hair-top:</P>
-                <p class="yellow-page-text" style="padding-bottom: 10px;">hair-top color:</p>
-                <P class="yellow-page-text" style="padding-bottom: 0px;">hair-bottom:</P>
-                <p class="yellow-page-text" style="padding-bottom: 10px;">hair-bottom color:</p>
+                <span class="yellow-page-text">bangs:</span>
             </div>
-
-            <!-- customizing options -->
             <div class="right-wrapper">
-                <!-- bangs selection -->
                 <div class="options-wrapper">
-                    <button class="arrow" onclick="hairFlipBangs(0)"><</button>
+                    <button class="arrow" onclick="hairFlipBangs(0)">
+                        <img src="png_files/left-arrow.png" />
+                    </button>
                     <div class="yellow-page-header" id="page-option"></div>
-                    <button class="arrow" onclick="hairFlipBangs(1)">></button>
+                    <button class="arrow" onclick="hairFlipBangs(1)">
+                        <img src="png_files/right-arrow.png" />
+                    </button>
                 </div>
+            </div>
+        </div>
 
-                <!-- bangs color selection -->
+        <!-- hair-bangs color selection -->
+        <div class="overall-wrapper">
+            <div class="left-wrapper">
+                <span class="yellow-page-text">bangs:</span>
+            </div>
+            <div class="right-wrapper">
                 <div class="options-wrapper">
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('hairbangs', 0)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('hairbangs', 50)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('hairbangs', 100)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('hairbangs', 150)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('hairbangs', 200)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('hairbangs', 250)" style="background-color: #f4dfca;"></button>
                 </div>
+            </div>
+        </div>
 
-                <!-- hair-top selection -->
+        <!-- hair-top selection -->
+        <div class="overall-wrapper">
+            <div class="left-wrapper">
+                <span class="yellow-page-text">top:</span>
+            </div>
+            <div class="right-wrapper">
                 <div class="options-wrapper">
-                    <button class="arrow" onclick="hairFlipTop(0)"><</button>
+                    <button class="arrow" onclick="hairFlipTop(0)">
+                        <img src="png_files/left-arrow.png" />
+                    </button>
                     <div class="yellow-page-header" id="page-option"></div>
-                    <button class="arrow" onclick="hairFlipTop(1)">></button>
+                    <button class="arrow" onclick="hairFlipTop(1)">
+                        <img src="png_files/right-arrow.png" />
+                    </button>
                 </div>
+            </div>
+        </div>
 
-                <!-- hair-top color selection -->
+        <!-- hair-top color selection -->
+        <div class="overall-wrapper">
+            <div class="left-wrapper">
+                <span class="yellow-page-text">top color:</span>
+            </div>
+            <div class="right-wrapper">
                 <div class="options-wrapper">
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
-                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('hairtop', 0)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('hairtop', 50)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('hairtop', 100)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('hairtop', 150)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('hairtop', 200)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="adjustColor('hairtop', 250)" style="background-color: #f4dfca;"></button>
                 </div>
+            </div>
+        </div>
 
-                <!-- hair-bottom selection -->
+        <!-- hair-bottom selection -->
+        <div class="overall-wrapper">
+            <div class="left-wrapper">
+                <span class="yellow-page-text">bottom:</span>
+            </div>
+            <div class="right-wrapper">
                 <div class="options-wrapper">
-                    <button class="arrow" onclick="hairFlipBottom(0)"><</button>
+                    <button class="arrow" onclick="hairFlipBottom(0)">
+                        <img src="png_files/left-arrow.png" />
+                    </button>
                     <div class="yellow-page-header" id="page-option"></div>
-                    <button class="arrow" onclick="hairFlipBottom(1)">></button>
+                    <button class="arrow" onclick="hairFlipBottom(1)">
+                        <img src="png_files/right-arrow.png" />
+                    </button>
                 </div>
+            </div>
+        </div>
 
-                <!-- hair-bottom color selection -->
+        <!-- hair-bottom color selection -->
+        <div class="overall-wrapper">
+            <div class="left-wrapper">
+                <span class="yellow-page-text">bottom color:</span>
+            </div>
+            <div class="right-wrapper">
                 <div class="options-wrapper">
                     <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
                     <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
@@ -458,13 +590,21 @@
         </div>
         `;
 
+        /* ---- 4th page: CLOTHES ---- */
+        //
         const page_clothes = `
         <p>hello</p>
         `;
 
+        // all of the pages
         const page_contents = [page_info, page_body, page_hair, page_clothes];
 
+        //
+        //
+        //
+
         /* ------ page navigation ------ */
+        //
         function pageFlip(i){
             page_x = (page_x + i + pages.length) % pages.length;
             let page_op = pages[page_x];
@@ -489,29 +629,39 @@
         }
 
         /* ------ info navigation ------ */
+        //
+
+        // flip through genders
         function genderFlip(i){
             switch (i) {
                 case 0: // boy
                     if (by == 500) break;
                     else if (by == 0) {
                         by += 500;
+                        uy += 500;
                         let body = retrieveSprite(bx, by, width, height);
                         document.getElementById("sprite-body").src = body;
+                        let underWear = retrieveSprite(ux, uy, width, height);
+                        document.getElementById("sprite-under").src = underWear;
                         break;
                     }
                 case 1: // girl
                     if (by == 0) break;
                     else if (by == 500) {
-                        by -= 500
+                        by -= 500;
+                        uy -= 500;
                         let body = retrieveSprite(bx, by, width, height);
                         document.getElementById("sprite-body").src = body;
+                        let underWear = retrieveSprite(ux, uy, width, height);
+                        document.getElementById("sprite-under").src = underWear;
                         break;
                     };
             }   
         }
 
-        /* ------ info navigation ------ */
+        // flip through class options
         function classFlip(i){
+            let hue = 0;
             switch (i) {
                 case 0: // left arrow
                     bx = (bx - 400 + (classes.length*400)) % (classes.length*400);
@@ -521,15 +671,53 @@
                     break;
             }
 
+            switch (bx) {
+                case 0: // human
+                    hue = 0;
+                    class_x = 0;
+                    break;
+                case 400: // elf
+                    hue = 30;
+                    class_x = 1;
+                    break;
+                case 800: // fairy
+                    hue = 60;
+                    class_x = 2;
+                    break;
+                case 1200: // fairy
+                    hue = 60;
+                    class_x = 3;
+                    break;
+                case 1600: // fairy
+                    hue = 60;
+                    class_x = 4;
+                    break;
+            }
+
+            let class_op = classes[class_x];
+            let class_fill = document.getElementById("class-option");
+            class_fill.textContent = `${class_op}`;
+
             let body = retrieveSprite(bx, by, width, height);
-            document.getElementById("sprite-body").src = body;
+            let body_sprite = document.getElementById("sprite-body");
+            body_sprite.src = body;
+            //body_sprite.style.filter = `hue-rotate(${hue}deg)`;
+
+            
         }
 
-        function skinColor(i){
-            skin_op = skins[i];
-            updateBody();
+        /* ------ body navigation ------ */
+        //
+
+        // adjust skin color
+        function skinColor(i, j){
+            //let body = retrieveSprite(bx, by, width, height);
+            //document.getElementById("sprite-body").src = body;
+            let body = document.getElementById("sprite-body");
+            body.style.filter =`brightness(${i}) saturate(${j})`;
         }
 
+        // flip through eyes options
         function eyesFlip(i){
             switch (i) {
                 case 0: // left arrow
@@ -544,6 +732,7 @@
             document.getElementById("sprite-eyes").src = eyes;
         }
 
+        // flip through brows options
         function browsFlip(i){
             switch (i) {
                 case 0: // left arrow
@@ -558,6 +747,10 @@
             document.getElementById("sprite-brows").src = brows;
         }
 
+        /* ------ hair navigation ------ */
+        //
+
+        // flip through hair-bangs options
         function hairFlipBangs(i){
             switch (i) {
                 case 0: // left arrow
@@ -572,6 +765,7 @@
             document.getElementById("sprite-hairbangs").src = hairBangs;
         }
 
+        // flip through hair-top options
         function hairFlipTop(i){
             switch (i) {
                 case 0: // left arrow
@@ -586,6 +780,7 @@
             document.getElementById("sprite-hairtop").src = hairTop;
         }
 
+        // flip through hair-bottom options
         function hairFlipBottom(i){
             switch (i) {
                 case 0: // left arrow
@@ -600,33 +795,30 @@
             document.getElementById("sprite-hairbot").src = hairBot;
         }
 
-        /* ------ page saves ------ */
-        function updateBody(){
-            let body_image = document.getElementById("body-image");
-            console.log(body_path)
-            body_image.src = body_path;
-
-            // Ensure consistent height
-            body_image.style.height = "450px"; // Set the desired height
-            body_image.style.objectFit = "contain"; // Preserve aspect ratio
+        // adjust color (brows, eyes, hair-top, bottom, bangs)
+        function adjustColor(part, hue){
+            let sprite_part = document.getElementById(`sprite-${part}`);
+            sprite_part.style.filter =`hue-rotate(${hue}deg)`;
         }
+        /* ------ page saves ------ */
+        //
+
+        // load info when flipping through pages
         function loadInfo(){
-            class_op = classes[class_x];
+            let class_op = classes[class_x];
             let class_fill = document.getElementById("class-option");
             class_fill.textContent = `${class_op}`;
-        }
-
-        function loadBody(){
-            
         }
 
         function loadClothes(){
 
         }
 
+        // retrieve initial character elements upon startup
         function initialSprite(){
-
             // pixel code (px)
+            ux = 2000;
+            uy = 0;
             bx = 0; // body x
             by = 0; // body y
             hbx = 0; // hair bangs x
@@ -639,6 +831,9 @@
             ey = 3000; // eyes y
             ebx = 0; // brows x
             eby = 3500; // brows y
+
+            let underWear = retrieveSprite(ux, uy, width, height);
+            document.getElementById("sprite-under").src = underWear;
 
             let body = retrieveSprite(bx, by, width, height);
             document.getElementById("sprite-body").src = body;
@@ -659,7 +854,7 @@
             document.getElementById("sprite-brows").src = brows;
         }
         
-
+        // retrieve sprite from sprite sheet with top-left coordinates
         function retrieveSprite(x, y, width, height){
             let canvas = document.createElement("canvas");
             let ctx = canvas.getContext("2d");
