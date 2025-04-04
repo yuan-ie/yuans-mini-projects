@@ -254,6 +254,12 @@
         const genders = ["male", "female"];
         const classes = ["human", "elf", "fairy", "goblin", "orc"];
         const skins = ["light", "tan"];
+        const hairtop_len = 7;
+        const hairbot_len = 9;
+        const hairbangs_len = 7;
+        const eyes_len = 5;
+        const brows_len = 6;
+        
 
         // right side - body initialization
         sprite_sheet.onload = function(){
@@ -293,6 +299,7 @@
             <!-- customizing labels -->
             <div class="left-wrapper">
                 <p class="yellow-page-text" style="padding-bottom: 0px;">name:</p>
+                <P class="yellow-page-text" style="padding-bottom: 0px;">gender:</P>
                 <P class="yellow-page-text" style="padding-bottom: 0px;">class:</P>
                 <p class="yellow-page-text" style="padding-bottom: 10px;">message:</p>
             </div>
@@ -308,8 +315,8 @@
                 </div>
                 <!-- choose a gender -->
                 <div class="options-wrapper">
-                    <button class="arrow" onclick="genderFlip(0)"><</button>
-                    <button class="arrow" onclick="genderFlip(1)">></button>
+                    <button class="arrow" onclick="genderFlip(0)">boy</button>
+                    <button class="arrow" onclick="genderFlip(1)">girl</button>
                 </div>
                 <!-- choose a class -->
                 <div class="options-wrapper">
@@ -343,6 +350,40 @@
                 <div class="options-wrapper">
                     <button class="color-block" onclick="skinColor(0)" style="background-color: #f4dfca;"></button>
                     <button class="color-block" onclick="skinColor(1)" style="background-color: #dabea1;"></button>
+                </div>
+
+                <!-- brows selection -->
+                <div class="options-wrapper">
+                    <button class="arrow" onclick="browsFlip(0)";"></button>
+                    <button class="arrow" onclick="browsFlip(1)";"></button>
+                </div>
+
+                <!-- brow color selection -->
+                <div class="options-wrapper">
+                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
+                </div>
+
+                <!-- eyes selection -->
+                <div class="options-wrapper">
+                    <button class="arrow" onclick="eyesFlip(0)";"></button>
+                    <button class="arrow" onclick="eyesFlip(1)";"></button>
+                </div>
+
+                <!-- eye color selection -->
+                <div class="options-wrapper">
+                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
+                    <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
+                </div>
+
             </div>
         </div>
         `;
@@ -365,29 +406,30 @@
             <div class="right-wrapper">
                 <!-- bangs selection -->
                 <div class="options-wrapper">
-                    <button class="arrow" onclick="hairFlipBangs(-1)"><</button>
+                    <button class="arrow" onclick="hairFlipBangs(0)"><</button>
                     <div class="yellow-page-header" id="page-option"></div>
-                    <button class="arrow" onclick="pageFlipBangs(1)">></button>
+                    <button class="arrow" onclick="hairFlipBangs(1)">></button>
                 </div>
 
                 <!-- hair-top selection -->
                 <div class="options-wrapper">
-                    <button class="arrow" onclick="hairFlipTop(-1)"><</button>
+                    <button class="arrow" onclick="hairFlipTop(0)"><</button>
                     <div class="yellow-page-header" id="page-option"></div>
-                    <button class="arrow" onclick="pageFlipTop(1)">></button>
+                    <button class="arrow" onclick="hairFlipTop(1)">></button>
                 </div>
 
                 <!-- hair-bottom selection -->
                 <div class="options-wrapper">
-                    <button class="arrow" onclick="hairFlipBottom(-1)"><</button>
+                    <button class="arrow" onclick="hairFlipBottom(0)"><</button>
                     <div class="yellow-page-header" id="page-option"></div>
-                    <button class="arrow" onclick="pageFlipBottom(1)">></button>
+                    <button class="arrow" onclick="hairFlipBottom(1)">></button>
                 </div>
                 
                 <!-- hair color selection -->
                 <div class="options-wrapper">
                     <button class="color-block" onclick="hairColor(0)" style="background-color: #f4dfca;"></button>
                     <button class="color-block" onclick="hairColor(1)" style="background-color: #dabea1;"></button>
+                </div>
             </div>
         </div>
         `;
@@ -424,22 +466,39 @@
 
         /* ------ info navigation ------ */
         function genderFlip(i){
-            gen_op = genders[i];
-            updateBody();
+            switch (i) {
+                case 0: // boy
+                    if (by == 500) break;
+                    else if (by == 0) {
+                        by += 500;
+                        let body = retrieveSprite(bx, by, width, height);
+                        document.getElementById("sprite-body").src = body;
+                        break;
+                    }
+                case 1: // girl
+                    if (by == 0) break;
+                    else if (by == 500) {
+                        by -= 500
+                        let body = retrieveSprite(bx, by, width, height);
+                        document.getElementById("sprite-body").src = body;
+                        break;
+                    };
+            }   
         }
 
         /* ------ info navigation ------ */
         function classFlip(i){
-            /*
-            class_x = (class_x + i + classes.length) % classes.length;
-            class_op = classes[class_x];
-            let class_fill = document.getElementById("class-option");
-            class_fill.textContent = `${class_op}`;
+            switch (i) {
+                case 0: // left arrow
+                    bx = (bx - 400 + (classes.length*400)) % (classes.length*400);
+                    break;
+                case 1: // right arrow
+                    bx = (bx + 400 + (classes.length*400)) % (classes.length*400);
+                    break;
+            }
 
-            // reset the skin to the first one when class is changed. 
-            skin_op = skins[0];
-            updateBody();
-            */
+            let body = retrieveSprite(bx, by, width, height);
+            document.getElementById("sprite-body").src = body;
         }
 
         function skinColor(i){
@@ -448,33 +507,78 @@
         }
 
         function eyesFlip(i){
+            switch (i) {
+                case 0: // left arrow
+                    ex = (ex - 400 + (eyes_len*400)) % (eyes_len*400);
+                    break;
+                case 1: // right arrow
+                    ex = (ex + 400 + (eyes_len*400)) % (eyes_len*400);
+                    break;
+            }
 
+            let eyes = retrieveSprite(ex, ey, width, height);
+            document.getElementById("sprite-eyes").src = eyes;
         }
 
         function browsFlip(i){
+            switch (i) {
+                case 0: // left arrow
+                    ebx = (ebx - 400 + (brows_len*400)) % (brows_len*400);
+                    break;
+                case 1: // right arrow
+                    ebx = (ebx + 400 + (brows_len*400)) % (brows_len*400);
+                    break;
+            }
 
+            let brows = retrieveSprite(ebx, eby, width, height);
+            document.getElementById("sprite-brows").src = brows;
         }
 
         function hairFlipBangs(i){
+            switch (i) {
+                case 0: // left arrow
+                    hbx = (hbx - 400 + (hairbangs_len*400)) % (hairbangs_len*400);
+                    break;
+                case 1: // right arrow
+                    hbx = (hbx + 400 + (hairbangs_len*400)) % (hairbangs_len*400);
+                    break;
+            }
 
+            let hairBangs = retrieveSprite(hbx, hby, width, height);
+            document.getElementById("sprite-hairbangs").src = hairBangs;
         }
 
         function hairFlipTop(i){
+            switch (i) {
+                case 0: // left arrow
+                    htx = (htx - 400 + (hairtop_len*400)) % (hairtop_len*400);
+                    break;
+                case 1: // right arrow
+                    htx = (htx + 400 + (hairtop_len*400)) % (hairtop_len*400);
+                    break;
+            }
 
+            let hairTop = retrieveSprite(htx, hty, width, height);
+            document.getElementById("sprite-hairtop").src = hairTop;
         }
 
         function hairFlipBottom(i){
+            switch (i) {
+                case 0: // left arrow
+                    hbbx = (hbbx - 400 + (hairbot_len*400)) % (hairbot_len*400);
+                    break;
+                case 1: // right arrow
+                    hbbx = (hbbx + 400 + (hairbot_len*400)) % (hairbot_len*400);
+                    break;
+            }
 
+            let hairBot = retrieveSprite(hbbx, hbby, width, height);
+            document.getElementById("sprite-hairbot").src = hairBot;
         }
 
         /* ------ page saves ------ */
         function updateBody(){
             let body_image = document.getElementById("body-image");
-            
-            console.log(gen_op)
-            console.log(class_op)
-            console.log(skin_op)
-            let body_path = `svg_files/body/${gen_op}/${class_op}/${gen_op}-${class_op}-${skin_op}.svg`;
             console.log(body_path)
             body_image.src = body_path;
 
@@ -499,18 +603,18 @@
         function initialSprite(){
 
             // pixel code (px)
-            let bx = 0; // body x
-            let by = 0; // body y
-            let hbx = 0; // hair bangs x
-            let hby = 1000; // hair bangs y
-            let htx = 0; // hair top x
-            let hty = 2500; // hair top y
-            let hbbx = 0; // hair bottom x
-            let hbby = 1500; // hair bottom y
-            let ex = 0; // eyes x
-            let ey = 3000; // eyes y
-            let ebx = 0; // brows x
-            let eby = 3500; // brows y
+            bx = 0; // body x
+            by = 0; // body y
+            hbx = 0; // hair bangs x
+            hby = 1000; // hair bangs y
+            htx = 0; // hair top x
+            hty = 2500; // hair top y
+            hbbx = 0; // hair bottom x
+            hbby = 1500; // hair bottom y
+            ex = 0; // eyes x
+            ey = 3000; // eyes y
+            ebx = 0; // brows x
+            eby = 3500; // brows y
 
             let body = retrieveSprite(bx, by, width, height);
             document.getElementById("sprite-body").src = body;
