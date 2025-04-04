@@ -108,6 +108,46 @@
             border-width: 2px;
             cursor: pointer;
         }
+        .sprite-name {
+            color: #8E6649; 
+            font-size: 25px;
+            text-align: center;
+            font-weight: 500;
+            width: 200px;  
+        }
+
+        .sprite-container {
+            position: relative;
+            width: 400px;
+            height: 500px;
+        }
+
+        .sprite-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #sprite-hairbangs {
+            z-index: 6;
+        }
+        #sprite-eyes {
+            z-index: 5;
+        }
+        #sprite-brows {
+            z-index: 4;
+        }
+        #sprite-body {
+            z-index: 3;
+        }
+        #sprite-hairtop {
+            z-index: 2;
+        }
+        #sprite-hairbot {
+            z-index: 1;
+        }
     </style>
 </head>
 
@@ -158,7 +198,7 @@
                                 <div class="yellow-page-text" id="class-option" style="width: 100px; height: 20px; text-align: center;"></div>
                                 <button class="arrow" onclick="classFlip(1)">></button>
                             </div>
-                            
+
                             <!-- write a personal message -->
                             <p>message:</p>
                         </div>
@@ -168,15 +208,63 @@
             </div>
         </div>
         <!-- right side for the character -->
+
         <div class="right-wrapper">
-            <img id="body-image" src="svg_files/body/male/human/male-human-light.svg" height="450px" alt="body">
+            <p class="sprite-name">hello</p>
+            <!-- <img id="body-image" src="png_files/sprite-sheet-v1.png" width="500" height="625" />  -->
+            <div class="sprite-container">
+                <img id="sprite-body" width="400" height="500" /> 
+                <img id="sprite-hairbangs" width="400" height="500" /> 
+                <img id="sprite-hairtop" width="400" height="500" /> 
+                <img id="sprite-hairbot" width="400" height="500" /> 
+                <img id="sprite-eyes" width="400" height="500" /> 
+                <img id="sprite-brows" width="400" height="500" /> 
+            </div> 
         </div>
     </div>
+
+    <!-- -----------------SCRIPT------------------ -->
+    <!-- ----------------------------------------- -->
     <script>
+
+        /* initialize constants */
+        const sprite_sheet = new Image();
+        sprite_sheet.src = "png_files/sprite-sheet-v1.png";
+
+        /* pixel code (px) character initialization */
+        let bx = 0; // body x
+        let by = 0; // body y
+        let hbx = 0; // hair bangs x
+        let hby = 0; // hair bangs y
+        let htx = 0; // hair top x
+        let hty = 0; // hair top y
+        let hbbx = 0; // hair bottom x
+        let hbby = 0; // hair bottom y
+        let ex = 0; // eyes x
+        let ey = 0; // eyes y
+        let ebx = 0; // brows x
+        let eby = 0; // brows y
+
+        // sprite image size
+        const height = 500;
+        const width = 400;
+        
+        // for ui buttons and text
         const pages = ["info", "body", "hair", "clothes"];
         const genders = ["male", "female"];
         const classes = ["human", "elf", "fairy", "goblin", "orc"];
         const skins = ["light", "tan"];
+
+        // right side - body initialization
+        sprite_sheet.onload = function(){
+            //document.getElementById("body-image").src = initialSprite();
+            initialSprite();
+            //document.getElementById("body-image").src = "png_files/sprite-sheet-v1.png"
+        }
+
+        sprite_sheet.onerror = function () {
+            console.error("Failed to load sprite sheet!");
+        };
 
         // info page
         let page_op = pages[0];
@@ -342,6 +430,7 @@
 
         /* ------ info navigation ------ */
         function classFlip(i){
+            /*
             class_x = (class_x + i + classes.length) % classes.length;
             class_op = classes[class_x];
             let class_fill = document.getElementById("class-option");
@@ -350,6 +439,7 @@
             // reset the skin to the first one when class is changed. 
             skin_op = skins[0];
             updateBody();
+            */
         }
 
         function skinColor(i){
@@ -406,14 +496,53 @@
 
         }
 
-        function showSprite(x, y, width=400, height=500){
-            const svg = document.getElementById("body-display");
-            svg.setAttribute("viewBox", `${x}, ${y}, ${width}, ${height}`);
-            svg.innerHTML = `<use href="sprite-sheet.svg"></use>`;
-        }
+        function initialSprite(){
 
-        // Example usage
-        showSprite(100, 0, 100, 100); // Focus on the second sprite
+            // pixel code (px)
+            let bx = 0; // body x
+            let by = 0; // body y
+            let hbx = 0; // hair bangs x
+            let hby = 1000; // hair bangs y
+            let htx = 0; // hair top x
+            let hty = 2500; // hair top y
+            let hbbx = 0; // hair bottom x
+            let hbby = 1500; // hair bottom y
+            let ex = 0; // eyes x
+            let ey = 3000; // eyes y
+            let ebx = 0; // brows x
+            let eby = 3500; // brows y
+
+            let body = retrieveSprite(bx, by, width, height);
+            document.getElementById("sprite-body").src = body;
+
+            let hairBangs = retrieveSprite(hbx, hby, width, height);
+            document.getElementById("sprite-hairbangs").src = hairBangs;
+
+            let hairTop = retrieveSprite(htx, hty, width, height);
+            document.getElementById("sprite-hairtop").src = hairTop;
+
+            let hairBot = retrieveSprite(hbbx, hbby, width, height);
+            document.getElementById("sprite-hairbot").src = hairBot;
+
+            let eyes = retrieveSprite(ex, ey, width, height);
+            document.getElementById("sprite-eyes").src = eyes;
+
+            let brows = retrieveSprite(ebx, eby, width, height);
+            document.getElementById("sprite-brows").src = brows;
+        }
+        
+
+        function retrieveSprite(x, y, width, height){
+            let canvas = document.createElement("canvas");
+            let ctx = canvas.getContext("2d");
+
+            canvas.width = width;
+            canvas.height = height;
+
+            ctx.drawImage(sprite_sheet, x, y, width, height, 0, 0, width, height);
+
+            return canvas.toDataURL();
+        }
 
         
     </script>
